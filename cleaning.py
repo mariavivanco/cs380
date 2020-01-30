@@ -1,4 +1,3 @@
-
 import glob
 import os
 
@@ -15,17 +14,20 @@ def main():
           continue
 
 def cleanFile(file):
-    #clean headers
+    #clean headers + ending
      doc = open(file,"r");
      for line in doc:
-         header = "*** START" in line
+         header = "PREFACE" in line
          if header == True:
              break
      for line in doc:
         end = "*** END" in line
         if end == True:
             break
+        if "CHAPTER" in line: 
+            continue 
         for word in line.split():
             words.write(word + "\n")
+    
 if __name__== "__main__":
   main()
