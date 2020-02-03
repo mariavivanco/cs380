@@ -27,17 +27,23 @@ def main():
     wordsAllScenario = open("all.txt", "r")
     tokenization(wordsAllScenario,statsAll)
 def tokenization (inputFile, outputFile): 
+    # create new dictionary(Hashmap)
     wordMap = dict()
     doc = inputFile
+    #iterate through parsed file 
     for word in doc: 
+        #if word isn't already in hashmap, create new entry with value 1 
         if word not in wordMap.keys():
             wordMap[word] = 1 
         else: 
+            #it is already in hashmap, increment value 
             wordMap[word] += 1 
     totalWords = len(wordMap.keys())
     outputFile.write("unique words: " + str(totalWords)  + "\n")
+    #sort dictionary in decreasing order by value
     sortedStats = OrderedDict(sorted(wordMap.items(), key=operator.itemgetter(1), reverse=True))
     for word in sortedStats.keys(): 
+        #write to output file 
         outputFile.write(word.strip("\n") + ":" + str(sortedStats.get(word)) + "\n")
 if __name__== "__main__":
   main()
